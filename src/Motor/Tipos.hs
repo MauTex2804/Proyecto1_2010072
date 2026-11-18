@@ -59,3 +59,8 @@ data Comando
   | Ayuda
   | Salir
   deriving (Show, Eq)
+
+data ErrorMundo = ErrorMundo
+  { errLinea :: Maybe Int
+  , errMensaje :: String
+  } deriving (Show, Eq)
