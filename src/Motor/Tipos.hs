@@ -42,7 +42,8 @@ data Mundo = Mundo
   } deriving (Show, Eq)
 
 data Estado = Estado
-  { estSalaActual :: SalaId
+  { estMundo :: Mundo
+  , estSalaActual :: SalaId
   , estInventario :: [ObjetoId]
   , estGanado :: Bool
   } deriving (Show, Eq)

@@ -10,6 +10,7 @@ executable aventura
                     , Motor.Reconocedor
                     , Motor.Mundo
                     , Motor.Comandos
+                    , Motor.Nucleo
     build-depends:    base >=4.14 && <5
                     , containers
                     , directory
