@@ -2,10 +2,11 @@ module Motor.Mundo where
 
 import Motor.Tipos
 import Motor.Reconocedor
-import Data.Char (isSpace, isAlphaNum)
-import Data.List (isPrefixOf, nub, group, sort)
+import Data.Char (isSpace, isAlphaNum, isAlpha, isDigit)
+import Data.List (isPrefixOf, nub, group, sort, intercalate)
 import qualified Data.Map as Map
 import qualified Data.Set as Set
+import Control.Monad (forM, forM_, unless, when)
 
 type Linea = (Int, String)
 
@@ -154,7 +155,7 @@ validarMundo inicio meta salas objetos =
         , validarV7 salas
         , validarV8 inicio meta salas objetos
         , validarV9 inicio salas
-        , validarV10 meta salas
+        , validarV10 meta salas objetos
         ]
   in errs
 
@@ -228,8 +229,8 @@ alcanzablesDesde inicio salas = go Set.empty [inicio]
           Nothing -> go (Set.insert s visitados) resto
           Just sala -> go (Set.insert s visitados) (map salDestino (salaSalidas sala) ++ resto)
 
-validarV10 :: Meta -> Map.Map SalaId Sala -> [ErrorMundo]
-validarV10 meta salas =
+validarV10 :: Meta -> Map.Map SalaId Sala -> Map.Map ObjetoId Objeto -> [ErrorMundo]
+validarV10 meta salas objetos =
   let objetosEnSalas = Set.fromList (concatMap salaObjetos (Map.elems salas))
       requeridos = case meta of
         LlegarA _ -> []
