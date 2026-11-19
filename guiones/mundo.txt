@@ -1,0 +1,13 @@
+tomar antorcha
+tomar nota
+norte
+norte
+tomar llave_oxidada
+tomar espada_rota
+sur
+este
+tomar moneda_oro
+este
+este
+tomar cofre
+norte

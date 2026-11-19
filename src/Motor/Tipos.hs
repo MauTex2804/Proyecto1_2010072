@@ -6,24 +6,24 @@ type SalaId = String
 type ObjetoId = String
 
 data Direccion = Norte | Sur | Este | Oeste | Arriba | Abajo
-  deriving (Show, Eq, Ord)
+  deriving (Show, Eq, Ord, Read)
 
 data Meta
   = LlegarA SalaId
   | LlevarA ObjetoId SalaId
-  deriving (Show, Eq)
+  deriving (Show, Eq, Read)
 
 data Objeto = Objeto
   { objId :: ObjetoId
   , objDesc :: String
   , objLuz :: Bool
-  } deriving (Show, Eq)
+  } deriving (Show, Eq, Read)
 
 data Salida = Salida
   { salDir :: Direccion
   , salDestino :: SalaId
   , salRequiere :: Maybe ObjetoId
-  } deriving (Show, Eq)
+  } deriving (Show, Eq, Read)
 
 data Sala = Sala
   { salaId :: SalaId
@@ -31,7 +31,7 @@ data Sala = Sala
   , salaSalidas :: [Salida]
   , salaObjetos :: [ObjetoId]
   , salaOscura :: Bool
-  } deriving (Show, Eq)
+  } deriving (Show, Eq, Read)
 
 data Mundo = Mundo
   { mundoTitulo :: String
@@ -39,14 +39,14 @@ data Mundo = Mundo
   , mundoMeta :: Meta
   , mundoSalas :: Map.Map SalaId Sala
   , mundoObjetos :: Map.Map ObjetoId Objeto
-  } deriving (Show, Eq)
+  } deriving (Show, Eq, Read)
 
 data Estado = Estado
   { estMundo :: Mundo
   , estSalaActual :: SalaId
   , estInventario :: [ObjetoId]
   , estGanado :: Bool
-  } deriving (Show, Eq)
+  } deriving (Show, Eq, Read)
 
 data Comando
   = Ir Direccion
@@ -59,9 +59,9 @@ data Comando
   | Cargar String
   | Ayuda
   | Salir
-  deriving (Show, Eq)
+  deriving (Show, Eq, Read)
 
 data ErrorMundo = ErrorMundo
   { errLinea :: Maybe Int
   , errMensaje :: String
-  } deriving (Show, Eq)
+  } deriving (Show, Eq, Read)

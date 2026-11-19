@@ -1,0 +1,62 @@
+# Mazmorra Oscura - Variante 0 (Oscuridad)
+MUNDO: La Mazmorra del Rey Olvidado
+INICIO: entrada
+META: llevar cofre a salida
+---
+OBJETO: antorcha
+DESC: Una antorcha vieja, nos servira para iluminar el camino.
+---
+OBJETO: llave_oxidada
+DESC: Una llave de hierro oxidada.
+---
+OBJETO: cofre
+DESC: Un cofre pequeño con algunas escrituras en el.
+---
+OBJETO: espada_rota
+DESC: Una espada rota pero es mejor que nada.
+---
+OBJETO: moneda_oro
+DESC: Una moneda de oro brillante.
+---
+OBJETO: nota
+DESC: Un papel arrugado que dice: "La oscuridad no es tu enemiga, la antorcha sí".
+---
+SALA: entrada
+DESC: La entrada de la mazmorra. Hay una antorcha en el suelo.
+SALIDA: norte -> pasillo_oscuro
+OBJETO: antorcha
+OBJETO: nota
+---
+SALA: pasillo_oscuro
+DESC: Un pasillo largo y oscuro en el que no puedes ver nada.
+OSCURA: si
+SALIDA: sur -> entrada
+SALIDA: norte -> celda
+SALIDA: este -> sala_guardia
+---
+SALA: celda
+DESC: Una celda con un esqueleto esposado.
+SALIDA: sur -> pasillo_oscuro
+OBJETO: llave_oxidada
+OBJETO: espada_rota
+---
+SALA: sala_guardia
+DESC: La sala de los guardias. Hay una mesa vieja y una puerta al este.
+SALIDA: oeste -> pasillo_oscuro
+SALIDA: este -> puerta_bloqueada requiere llave_oxidada
+OBJETO: moneda_oro
+---
+SALA: puerta_bloqueada
+DESC: Una puerta de madera reforzada con hierro. Está abierta.
+SALIDA: oeste -> sala_guardia
+SALIDA: este -> camara_tesoro
+---
+SALA: camara_tesoro
+DESC: La cámara del tesoro. Hay un cofre en el centro.
+SALIDA: oeste -> puerta_bloqueada
+SALIDA: norte -> salida
+OBJETO: cofre
+---
+SALA: salida
+DESC: La salida de la mazmorra.
+SALIDA: sur -> camara_tesoro

@@ -1,0 +1,16 @@
+# Este mundo tiene un error de la variante (oscuridad).
+MUNDO: Mazmorra Oscura
+INICIO: sala1
+META: llevar antorcha a sala2
+---
+SALA: sala1
+DESC: Una sala oscura.
+OSCURA: si
+SALIDA: norte -> sala2
+---
+SALA: sala2
+DESC: Una sala iluminada.
+SALIDA: sur -> sala1
+---
+OBJETO: antorcha
+DESC: Una antorcha que ilumina.

@@ -1,0 +1,14 @@
+# Este mundo tiene errores de semantica.
+MUNDO: Mundo Invalido
+INICIO: sala1
+META: llegar a sala3
+---
+SALA: sala1
+DESC: Una sala.
+SALIDA: norte -> sala2
+OBJETO: fantasma
+---
+SALA: sala2
+DESC: Otra sala.
+SALIDA: sur -> sala1
+SALIDA: norte -> sala1

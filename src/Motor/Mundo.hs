@@ -2,11 +2,10 @@ module Motor.Mundo where
 
 import Motor.Tipos
 import Motor.Reconocedor
-import Data.Char (isSpace, isAlphaNum, isAlpha, isDigit)
-import Data.List (isPrefixOf, nub, group, sort, intercalate)
+import Data.Char (isSpace, isAlphaNum)
+import Data.List (isPrefixOf, nub, group, sort)
 import qualified Data.Map as Map
 import qualified Data.Set as Set
-import Control.Monad (forM, forM_, unless, when)
 
 type Linea = (Int, String)
 
@@ -18,8 +17,8 @@ esComentario ('#':_) = True
 esComentario _       = False
 
 esSeparador :: String -> Bool
-esSeparador "--" = True
-esSeparador _    = False
+esSeparador "---" = True
+esSeparador _     = False
 
 lineasUtiles :: String -> [Linea]
 lineasUtiles texto = 
@@ -90,12 +89,12 @@ leerMundo texto = do
     []     -> Left [ErrorMundo Nothing "el archivo esta vacio"]
 
   cabeceraPares <- mapM (elevarError . parsearLinea) cabecera
-  (titulo, inicio, meta) <- case cabeceraPares of
-    [("MUNDO", t), ("INICIO", i), ("META", m)] -> 
+  (titulo, inicio, meta) <- case (lookup "MUNDO" cabeceraPares, lookup "INICIO" cabeceraPares, lookup "META" cabeceraPares) of
+    (Just t, Just i, Just m) -> 
       case parsearMeta (0, "META: " ++ m) of
         Right metaVal -> Right (t, i, metaVal)
         Left err -> Left [err]
-    _ -> Left [ErrorMundo Nothing "cabecera mal formada"]
+    _ -> Left [ErrorMundo Nothing "cabecera mal formada (falta MUNDO, INICIO o META)"]
 
   let (bloquesObj, bloquesSala) = partitionBloques restoBloques
   objetosPares <- mapM parsearBloqueObjeto bloquesObj
@@ -114,8 +113,8 @@ partitionBloques = foldr clasificar ([], [])
   where
     clasificar b (objs, salas) =
       case b of
-        ((_, primera):_) | "OBJETO:" `isPrefixOf` primera -> (b:objs, salas)
-        ((_, primera):_) | "SALA:" `isPrefixOf` primera   -> (objs, b:salas)
+        ((_, primera):_) | "OBJETO" `isPrefixOf` primera -> (b:objs, salas)
+        ((_, primera):_) | "SALA" `isPrefixOf` primera   -> (objs, b:salas)
         _ -> (objs, salas)
 
 parsearBloqueObjeto :: [Linea] -> Either [ErrorMundo] (ObjetoId, Objeto)

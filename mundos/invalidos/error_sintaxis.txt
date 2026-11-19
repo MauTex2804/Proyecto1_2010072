@@ -1,0 +1,12 @@
+# Este mundo tiene errores de sintaxis.
+MUNDO: Mal Escrito
+INICIO: cuarto
+META: llegar cuarto
+---
+SALA: cuarto
+DESC: Un cuarto.
+SALIDA: noreste -> cuarto
+COLOR: azul
+---
+SALA: otro
+SALIDA: sur -> cuarto
